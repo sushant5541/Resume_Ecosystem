@@ -1,3 +1,10 @@
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
@@ -6,13 +13,31 @@ body {
   min-height: 100vh;
 }
 
+/* App root for proper footer positioning */
+.app-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Main content area that grows to push footer down */
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Navbar Sticky Styles */
 .app header {
   background: linear-gradient(135deg, #0b5cff 0%, #4a00e0 100%);
   color: white;
   padding: 16px 20px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  position: relative;
-  overflow: hidden;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .app header::before {
@@ -31,20 +56,57 @@ body {
   100% { transform: translateX(100%); }
 }
 
+/* Navbar layout */
+.app-header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px;
+  padding: 12px 20px;
+}
+
+.nav-links {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px;
+  flex-wrap: nowrap !important;
+}
+
+.nav-links a, .nav-links .small-muted, .nav-links .btn, .nav-links .btn.secondary {
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav-links a { 
+  color: rgba(255,255,255,0.95); 
+  text-decoration: none; 
+  padding: 8px 16px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.nav-links a:hover { 
+  background: rgba(255,255,255,0.06); 
+  transform: translateY(-1px); 
+}
+
+/* Main layout */
 main {
   display: flex;
   gap: 24px;
   padding: 24px;
-  max-width: 1200px;
+  max-width: 1400px; /* Increased from 1200px */
   margin: 0 auto;
+  flex: 1;
+  width: 100%;
 }
 
 .left {
-  width: 40%;
+  width: 45%; /* Increased from 40% */
 }
 
 .right {
-  width: 60%;
+  width: 55%; /* Increased from 60% */
 }
 
 .editor {
@@ -61,6 +123,7 @@ main {
   border-radius: 8px;
   transition: all 0.3s ease;
   background: white;
+  width: 100%;
 }
 
 .editor input:focus,
@@ -83,6 +146,7 @@ main {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   border: 1px solid #e2e8f0;
   transition: all 0.3s ease;
+  flex: 1;
 }
 
 .preview:hover {
@@ -96,6 +160,7 @@ main {
   border: 2px dashed #cbd5e0;
 }
 
+/* Button styles */
 button {
   padding: 12px 24px;
   background: linear-gradient(135deg, #0b5cff 0%, #4a00e0 100%);
@@ -141,13 +206,14 @@ button.secondary:hover {
   box-shadow: 0 6px 20px rgba(100, 116, 139, 0.4);
 }
 
-/* Footer styles */
+/* Footer styles - Sticky to bottom */
 .app-footer {
   background: linear-gradient(135deg, #0f1724 0%, #1e293b 100%);
   color: #cbd5e1;
-  padding: 80px 0;
-  margin-top: 60px;
+  padding: 60px 0;
+  margin-top: auto;
   position: relative;
+  width: 100%;
 }
 
 .app-footer::before {
@@ -201,33 +267,14 @@ button.secondary:hover {
   color: #ffffff;
 }
 
-/* Ensure navbar header and links are aligned correctly */
-.app-header {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  gap: 12px;
-  padding: 12px 20px;
-}
-.nav-links {
-  display: flex !important;
-  align-items: center !important;
-  gap: 12px;
-  flex-wrap: nowrap !important;
-}
-.nav-links a, .nav-links .small-muted, .nav-links .btn, .nav-links .btn.secondary {
-  display: inline-flex;
-  align-items: center;
-}
-.nav-links a { color: rgba(255,255,255,0.95); text-decoration: none; }
-.nav-links a:hover { background: rgba(255,255,255,0.06); transform: translateY(-1px); }
-
-
 /* Container and Card styles */
 .container {
-  max-width: 1200px;
+  max-width: 1400px; /* Increased from 1200px */
   margin: 0 auto;
   padding: 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .card {
@@ -239,6 +286,7 @@ button.secondary:hover {
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  flex: 1;
 }
 
 .card::before {
@@ -287,9 +335,10 @@ button.secondary:hover {
 /* Layout styles */
 .layout {
   display: grid;
-  grid-template-columns: 300px 1fr;
+  grid-template-columns: 320px 1fr; /* Increased from 300px */
   gap: 24px;
   align-items: start;
+  flex: 1;
 }
 
 .sidebar {
@@ -309,17 +358,101 @@ button.secondary:hover {
   display: block;
 }
 
-/* Login panel specific styles */
+/* Login panel specific styles - WIDER */
 .login-panel {
-  max-width: 400px;
-  margin: 60px auto;
+  max-width: 500px; /* Increased from 400px */
+  margin: 0 auto;
   text-align: center;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 60vh;
+  width: 100%;
 }
 
+.login-panel .card {
+  padding: 40px; /* Increased padding */
+}
+
+/* Resume form container - WIDER */
+.resume-form-container {
+  max-width: 1000px; /* Specific wider container for resume */
+  margin: 0 auto;
+  width: 100%;
+}
+
+.resume-form-container .card {
+  padding: 40px; /* Increased padding */
+}
+
+/* Wider form containers */
+.wide-form {
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.wide-form .card {
+  padding: 36px;
+}
+
+/* Home page styles */
+.home-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 60vh;
+}
+
+/* Text styles */
 .text-muted {
   color: #64748b;
   font-size: 14px;
   margin-top: 8px;
+}
+
+/* Dashboard specific */
+.dashboard-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Resume page specific */
+.resume-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.resume-container .container {
+  max-width: 1400px; /* Wider for resume page */
+}
+
+/* Profile page specific */
+.profile-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Form container improvements */
+.form-container {
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.form-container .card {
+  padding: 36px;
+}
+
+/* Wider input fields in forms */
+.wide-input {
+  width: 100%;
+  max-width: none;
 }
 
 /* Responsive design */
@@ -327,6 +460,7 @@ button.secondary:hover {
   main {
     flex-direction: column;
     padding: 16px;
+    gap: 16px;
   }
   
   .left, .right {
@@ -335,6 +469,7 @@ button.secondary:hover {
   
   .layout {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
   
   .app-footer .footer-inner {
@@ -344,6 +479,72 @@ button.secondary:hover {
   }
   
   .app-footer {
-    padding: 60px 0;
+    padding: 40px 0;
   }
+  
+  .container {
+    padding: 16px;
+    max-width: 100%;
+  }
+  
+  .card {
+    padding: 24px;
+  }
+  
+  .app header {
+    padding: 12px 16px;
+  }
+  
+  .nav-links {
+    gap: 8px;
+  }
+  
+  .nav-links a {
+    padding: 6px 12px;
+    font-size: 14px;
+  }
+  
+  .login-panel {
+    margin: 20px auto;
+    min-height: auto;
+    max-width: 95%;
+  }
+  
+  .login-panel .card {
+    padding: 24px;
+  }
+  
+  .resume-form-container {
+    max-width: 95%;
+  }
+  
+  .resume-form-container .card {
+    padding: 24px;
+  }
+  
+  .wide-form {
+    max-width: 95%;
+  }
+  
+  .wide-form .card {
+    padding: 24px;
+  }
+}
+
+/* Utility classes */
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.flex-1 { flex: 1; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.w-full { width: 100%; }
+.h-full { height: 100%; }
+.min-h-screen { min-height: 100vh; }
+
+/* Page specific containers to ensure proper footer placement */
+.page-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
